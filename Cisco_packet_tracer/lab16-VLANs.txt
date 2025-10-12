@@ -1,0 +1,28 @@
+In questo laboratorio di pratica sulle LAN virtuali ho anzitutto
+configurato staticamente il default gateway di ciascun host all'ultimo indirizzodisponibile della rete (cioe' quello prima del broadcast) poi ho configurato
+le interfacce del router con tali indirizzi
+esempio:
+en
+conf t
+int g0/0
+ip addr 10.0.0.62 255.255.255.192
+desc ...
+no shut
+end
+w
+
+dopodiche' ho configurato lo switch in modo da creare le 3 diverse VLAN
+esempio:
+en
+conf t
+int range g0/1, f3/1, f4/1
+switchport mode access
+switchport access vlan 10
+exit
+vlan 10
+name Engineering
+end
+w
+
+
+ora provando a pingare PC3 da PC1 in modalita' simulazione posso osservare come lo switch passi tutto al router rispettando i limiti imposti dalle VLAN, questo mi permette di avere un sistema piu' sicuro e meno trafficato in cui lo switch evita di fare flooding agli altri dipartimenti
