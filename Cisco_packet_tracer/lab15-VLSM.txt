@@ -1,0 +1,12 @@
+obiettivo del laboratorio era quello di andare a scomporre attraverso variable
+prefix una rete in 4 sottoreti di grandezze diverse, ho inizialmente calcolato per ciascuna rete il prefisso necessario per minimizzare gli sprechi di indirizzi, poi ho assegnato il primo indizirizzo disponibile al pc connesso a quella sottorete e l'ultimo al router, settato anche il gateway corretto e la netmask, ho poi configurato le routes statiche per i due router e testato il tutto facendo pingare ciascun computer
+
+esempio di comandi che ho fatto: (su LAN2 che ha prefix /25)
+en
+conf t
+int g0/1
+ip addr 192.168.5.126 255.255.255.128
+desc ...
+no shut
+end
+w
