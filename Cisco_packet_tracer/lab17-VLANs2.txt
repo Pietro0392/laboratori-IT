@@ -1,0 +1,18 @@
+in questo laboratorio ho impostato 3 vlan in maniera simile al laboratorio precedente, tuttavia ho utilizzato delle porte trunk per ottenere un sistema piu' scalabile, di fatti con l'aumentare delle vlan utilizzando un solo cavo per vlan prima o poi giungerei al limite di porte fisiche del router
+
+esempio:
+int g0/1
+switchport mode trunk
+switchport trunk allow vlan 10,30
+switchport trunk native vlan 1001
+vlan 30
+do show int trunk
+
+e poi per configurare da Sw2 a R1 con ROAS(router on a stick):
+int g0/0
+no shut
+int g0/0.10
+encapsulation dot1q 10
+ip addr 10.0.0.62 255.255.255.192
+
+e cosi' per le altre 2 cioe' .20 e .30 
