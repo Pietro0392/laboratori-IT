@@ -1,0 +1,22 @@
+in questo laboratorio sono andato a lavorare su dispositivi con supporto ai protocolli DTP/VTP, questi protocolli permettono di automatizzare la configurazione di VLANs tuttavia sono anche fonte di attacchi da utenti malintenzionati, difatti la prima cosa che faccio nel laboratorio e' disabilitare DTP andando nelle interfacce che voglio come trunk e configurandole con:
+
+switchport mode trunk
+switchport nonegotiate
+
+dopodiche' ho nominato il dominio come "CCNA" e creato le 3 vlan su SW1 e osservato come anche SW2 e SW3 mi copiassero la configurazione aggiornando il loro db privato (NVRAM) delle vlans,
+poi come scritto nelle richieste ho impostato sw2 su transparent semplicemente con:
+  vtp mode transparent
+
+e aggiungto la vlan 40 osservando che sw1 e sw3 non seguissero quello sw2 (in transparent non comunica i suoi cambiamenti) (tuttavia essendo SW2 nel dominio CISCO propaga cambiamenti degli altri server nel dominio senza applicarli su di se')
+ho poi configurato sw3 come client con
+  vtp mode client
+
+e provato ad aggiungere vlan 50, ovviamente me lo ha rifiutato essendo che un client non puo' scegliere le vlan ma semplicemente ascolta gli altri server e aspetta modifiche
+
+infine ho connesso le altre interfacce con
+  switchport mode access
+  switchport access vlan x
+
+come avevo fatto qualche laboratorio fa, e in risposta alla domanda, queste azioni disattivano la negoziazione ossia DTP
+
+NOTA: il laboratorio e' statico, solo configurazioni, i computer non possono comunicare fra vlan essendo che sono reti diverse e non ho dispositivi di lv.3 per cui neanche un gateway, ovviamente dispositivi appartenenti alla stessa VLAN possono comunicare con ARP e flooding dello switch sulla stessa vlan
